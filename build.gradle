@@ -28,8 +28,6 @@ minecraft {
 
             property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
 
-            arg '-mixin.config=goety.mixins.json'
-
             mods {
                 tally_master {
                     source sourceSets.main
@@ -48,8 +46,6 @@ minecraft {
 
             property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
 
-            arg '-mixin.config=goety.mixins.json'
-
             mods {
                 tally_master {
                     source sourceSets.main
@@ -67,8 +63,6 @@ minecraft {
             property 'mixin.env.disableRefMap', 'true'
 
             args '--mod', 'goety', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
-
-            arg '-mixin.config=goety.mixins.json'
 
             mods {
                 tally_master {
