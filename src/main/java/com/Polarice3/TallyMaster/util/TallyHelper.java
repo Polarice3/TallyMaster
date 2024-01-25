@@ -26,7 +26,7 @@ public class TallyHelper {
     }
 
     public static void sendTallyUpdatePacket(Player player) {
-        if (!player.getLevel().isClientSide()) {
+        if (!player.level().isClientSide()) {
             ModNetwork.sendTo(player, new TallyUpdatePacket(player));
         }
     }
