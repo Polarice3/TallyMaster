@@ -1,0 +1,91 @@
+{
+  "parent": "tally_master:tally_master/root",
+  "display": {
+    "icon": {
+      "item": "minecraft:hay_block"
+    },
+    "title": {
+      "translate": "advancements.tally_master.slaughterhouse.title"
+    },
+    "description": {
+      "translate": "advancements.tally_master.slaughterhouse.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "pig": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "minecraft:pig"
+            }
+          }
+        ],
+        "amount": 100
+      },
+      "trigger": "tally_master:tally_milestone"
+    },
+    "chicken": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "minecraft:chicken"
+            }
+          }
+        ],
+        "amount": 100
+      },
+      "trigger": "tally_master:tally_milestone"
+    },
+    "cow": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "minecraft:cow"
+            }
+          }
+        ],
+        "amount": 100
+      },
+      "trigger": "tally_master:tally_milestone"
+    },
+    "sheep": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "minecraft:sheep"
+            }
+          }
+        ],
+        "amount": 100
+      },
+      "trigger": "tally_master:tally_milestone"
+    }
+  },
+  "requirements": [
+    [
+      "pig",
+      "chicken",
+      "cow",
+      "sheep"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  }
+}

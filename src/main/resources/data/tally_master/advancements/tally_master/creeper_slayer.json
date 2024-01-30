@@ -1,0 +1,43 @@
+{
+  "parent": "tally_master:tally_master/root",
+  "display": {
+    "icon": {
+      "item": "minecraft:creeper_head"
+    },
+    "title": {
+      "translate": "advancements.tally_master.creeper_slayer.title"
+    },
+    "description": {
+      "translate": "advancements.tally_master.creeper_slayer.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "creeper": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "minecraft:creeper"
+            }
+          }
+        ],
+        "amount": 25
+      },
+      "trigger": "tally_master:tally_milestone"
+    }
+  },
+  "requirements": [
+    [
+      "creeper"
+    ]
+  ],
+  "rewards": {
+    "experience": 10
+  }
+}
