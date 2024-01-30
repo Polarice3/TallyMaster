@@ -17,9 +17,9 @@ public class TallyTrigger extends SimpleCriterionTrigger<TallyTrigger.TriggerIns
     private TallyTrigger() {}
 
     @Override
-    protected TriggerInstance createInstance(JsonObject p_66248_, EntityPredicate.Composite p_66249_, DeserializationContext p_66250_) {
+    protected TriggerInstance createInstance(JsonObject p_66248_, ContextAwarePredicate p_66249_, DeserializationContext p_66250_) {
         MinMaxBounds.Ints minmaxbounds$ints = MinMaxBounds.Ints.fromJson(p_66248_.get("amount"));
-        return new TallyTrigger.TriggerInstance(p_66249_, EntityPredicate.Composite.fromJson(p_66248_, "entity", p_66250_), minmaxbounds$ints);
+        return new TallyTrigger.TriggerInstance(p_66249_, EntityPredicate.fromJson(p_66248_, "entity", p_66250_), minmaxbounds$ints);
     }
 
     public void trigger(ServerPlayer p_48105_, Entity p_48106_, int amount) {
@@ -36,10 +36,10 @@ public class TallyTrigger extends SimpleCriterionTrigger<TallyTrigger.TriggerIns
     }
 
     public static class TriggerInstance extends AbstractCriterionTriggerInstance {
-        private final EntityPredicate.Composite entityPredicate;
+        private final ContextAwarePredicate entityPredicate;
         private final MinMaxBounds.Ints amount;
 
-        public TriggerInstance(EntityPredicate.Composite p_46890_, EntityPredicate.Composite p_46891_, MinMaxBounds.Ints p_46892_) {
+        public TriggerInstance(ContextAwarePredicate p_46890_, ContextAwarePredicate p_46891_, MinMaxBounds.Ints p_46892_) {
             super(TallyTrigger.ID, p_46890_);
             this.entityPredicate = p_46891_;
             this.amount = p_46892_;
