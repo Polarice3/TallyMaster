@@ -2,10 +2,12 @@ package com.Polarice3.TallyMaster.common.events;
 
 import com.Polarice3.TallyMaster.TallyConfig;
 import com.Polarice3.TallyMaster.TallyMaster;
+import com.Polarice3.TallyMaster.common.advancements.TallyTrigger;
 import com.Polarice3.TallyMaster.common.capabilities.tally.ITally;
 import com.Polarice3.TallyMaster.common.capabilities.tally.TallyProvider;
 import com.Polarice3.TallyMaster.util.TallyHelper;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -68,6 +70,9 @@ public class TallyEvents {
                     player.displayClientMessage(Component.translatable("info.tally_master.tally.milestone", player.getDisplayName(), killAmount, target.getType().getDescription()), false);
                 }
                 TallyHelper.increaseTally(player, target.getType());
+                if (player instanceof ServerPlayer serverPlayer){
+                    TallyTrigger.INSTANCE.trigger(serverPlayer, target, killAmount + 1);
+                }
             }
         }
     }

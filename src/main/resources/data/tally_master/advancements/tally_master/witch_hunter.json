@@ -1,0 +1,43 @@
+{
+  "parent": "tally_master:tally_master/root",
+  "display": {
+    "icon": {
+      "item": "minecraft:stick"
+    },
+    "title": {
+      "translate": "advancements.tally_master.witch_hunter.title"
+    },
+    "description": {
+      "translate": "advancements.tally_master.witch_hunter.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "witch": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "minecraft:witch"
+            }
+          }
+        ],
+        "amount": 25
+      },
+      "trigger": "tally_master:tally_milestone"
+    }
+  },
+  "requirements": [
+    [
+      "witch"
+    ]
+  ],
+  "rewards": {
+    "experience": 10
+  }
+}

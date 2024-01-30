@@ -1,0 +1,43 @@
+{
+  "parent": "tally_master:tally_master/root",
+  "display": {
+    "icon": {
+      "item": "minecraft:slime_ball"
+    },
+    "title": {
+      "translate": "advancements.tally_master.slimy_squisher.title"
+    },
+    "description": {
+      "translate": "advancements.tally_master.slimy_squisher.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "slime": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "minecraft:slime"
+            }
+          }
+        ],
+        "amount": 100
+      },
+      "trigger": "tally_master:tally_milestone"
+    }
+  },
+  "requirements": [
+    [
+      "slime"
+    ]
+  ],
+  "rewards": {
+    "experience": 25
+  }
+}

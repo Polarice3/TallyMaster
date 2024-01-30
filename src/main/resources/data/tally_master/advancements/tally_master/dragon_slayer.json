@@ -1,0 +1,43 @@
+{
+  "parent": "tally_master:tally_master/root",
+  "display": {
+    "icon": {
+      "item": "minecraft:dragon_head"
+    },
+    "title": {
+      "translate": "advancements.tally_master.dragon_slayer.title"
+    },
+    "description": {
+      "translate": "advancements.tally_master.dragon_slayer.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "criteria": {
+    "dragon": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "minecraft:ender_dragon"
+            }
+          }
+        ],
+        "amount": 25
+      },
+      "trigger": "tally_master:tally_milestone"
+    }
+  },
+  "requirements": [
+    [
+      "dragon"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  }
+}

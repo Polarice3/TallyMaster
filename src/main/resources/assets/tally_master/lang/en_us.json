@@ -1,3 +1,24 @@
 {
-  "info.tally_master.tally.milestone": "%s has defeated their %sth %s!"
+  "info.tally_master.tally.milestone": "%s has defeated their %sth %s!",
+
+  "advancements.tally_master.root.title": "Tally Master",
+  "advancements.tally_master.root.description": "Adds milestones that increase damage and resistance against killed mobs.",
+  "advancements.tally_master.creeper_slayer.title": "Creeper Slayer",
+  "advancements.tally_master.creeper_slayer.description": "Kill 25 Creepers.",
+  "advancements.tally_master.dragon_slayer.title": "Dragon Slayer",
+  "advancements.tally_master.dragon_slayer.description": "Kill the Ender Dragon 25 times.",
+  "advancements.tally_master.ghastbuster.title": "Ghastbuster",
+  "advancements.tally_master.ghastbuster.description": "Kill 25 Ghasts",
+  "advancements.tally_master.glue_factory.title": "Glue Factory",
+  "advancements.tally_master.glue_factory.description": "Kill 25 Horses",
+  "advancements.tally_master.mass_exorcism.title": "Mass Exorcism",
+  "advancements.tally_master.mass_exorcism.description": "Purge 25 Withers.",
+  "advancements.tally_master.slaughterhouse.title": "Slaughterhouse",
+  "advancements.tally_master.slaughterhouse.description": "Butcher a 100 livestock.",
+  "advancements.tally_master.slimy_squisher.title": "Slimy Squisher",
+  "advancements.tally_master.slimy_squisher.description": "Squish a 100 Slimes.",
+  "advancements.tally_master.village_protector.title": "Village Protector",
+  "advancements.tally_master.village_protector.description": "Slain a 100 raiders.",
+  "advancements.tally_master.witch_hunter.title": "Witch Hunter",
+  "advancements.tally_master.witch_hunter.description": "Kill 25 Witches."
 }

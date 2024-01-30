@@ -1,0 +1,22 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:paper"
+    },
+    "title": {
+      "translate": "advancements.tally_master.root.title"
+    },
+    "description": {
+      "translate": "advancements.tally_master.root.description"
+    },
+    "background": "minecraft:textures/block/stone_bricks.png",
+    "show_toast": false,
+    "announce_to_chat": false,
+    "hidden" : false
+  },
+  "criteria": {
+    "tick": {
+      "trigger": "minecraft:tick"
+    }
+  }
+}
