@@ -12,9 +12,7 @@ logoFile="tally_master.png" #optional
 #credits="Thanks for this example mod goes to Java" #optional
 authors="Polarice3" #optional
 #displayTest="MATCH_VERSION" # MATCH_VERSION is the default if nothing is specified (#optional)
-description='''
-Increases damage against and decreases damage from mobs after players kill a certain number of them. Based on Terraria's Banner system.
-'''
+description="Increases damage and resistance against certain mobs after players kill a number of them. Based of Terraria's Banner system."
 [[dependencies.tally_master]] #optional
     modId="forge" #mandatory
     mandatory=true #mandatory
