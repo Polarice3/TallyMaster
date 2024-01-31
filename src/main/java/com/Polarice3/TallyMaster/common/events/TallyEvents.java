@@ -45,20 +45,22 @@ public class TallyEvents {
     public static void LivingHurt(LivingHurtEvent event){
         Entity entity = event.getSource().getEntity();
         LivingEntity target = event.getEntity();
-        if (TallyConfig.tallyDamage) {
+        if (TallyConfig.tallyAttack > 0) {
             if (entity instanceof Player player) {
                 int killAmount = TallyHelper.getKillAmount(player, target.getType());
                 int postKill = killAmount / TallyConfig.tallyMilestone;
-                float prof = (0.05F * postKill) + 1.0F;
+                float percent = TallyConfig.tallyAttack / 100.0F;
+                float prof = (percent * postKill) + 1.0F;
                 event.setAmount(event.getAmount() * prof);
             }
         }
-        if (TallyConfig.tallyResistance) {
+        if (TallyConfig.tallyDefense > 0) {
             if (target instanceof Player player) {
                 if (entity instanceof LivingEntity livingSource) {
                     int killAmount = TallyHelper.getKillAmount(player, livingSource.getType());
                     int postKill = killAmount / TallyConfig.tallyMilestone;
-                    float prof = 0.05F * postKill;
+                    float percent = TallyConfig.tallyDefense / 100.0F;
+                    float prof = percent * postKill;
                     float finalAmount = Math.min(event.getAmount() * prof, event.getAmount() - 1.0F);
                     event.setAmount(event.getAmount() - finalAmount);
                 }
