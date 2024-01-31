@@ -1,6 +1,6 @@
 modLoader="javafml" #mandatory
 loaderVersion="[43,)"
-license="All rights reserved"
+license="MIT License"
 #issueTrackerURL="https://change.me.to.your.issue.tracker.example.invalid/" #optional
 [[mods]] #mandatory
 modId="tally_master" #mandatory
@@ -8,8 +8,8 @@ version="${file.jarVersion}" #mandatory
 displayName="Tally Master" #mandatory
 #updateJSONURL="https://change.me.example.invalid/updates.json" #optional
 #displayURL="https://change.me.to.your.mods.homepage.example.invalid/" #optional
-logoFile="examplemod.png" #optional
-credits="Thanks for this example mod goes to Java" #optional
+logoFile="tally_master.png" #optional
+#credits="Thanks for this example mod goes to Java" #optional
 authors="Polarice3" #optional
 #displayTest="MATCH_VERSION" # MATCH_VERSION is the default if nothing is specified (#optional)
 description='''
