@@ -1,6 +1,6 @@
 modLoader="javafml" #mandatory
 loaderVersion="[47,)" #mandatory
-license="All rights reserved"
+license="MIT License"
 #issueTrackerURL="https://change.me.to.your.issue.tracker.example.invalid/" #optional
 [[mods]] #mandatory
 modId="tally_master" #mandatory
@@ -9,11 +9,11 @@ displayName="Tally Master" #mandatory
 #updateJSONURL="https://change.me.example.invalid/updates.json" #optional
 #displayURL="https://change.me.to.your.mods.homepage.example.invalid/" #optional
 logoFile="examplemod.png" #optional
-credits="Thanks for this example mod goes to Java" #optional
+#credits="Thanks for this example mod goes to Java" #optional
 authors="Polarice3" #optional
 #displayTest="MATCH_VERSION" # MATCH_VERSION is the default if nothing is specified (#optional)
 description='''
-Increases damage against and decreases damage from mobs after players kill a certain number of them.
+Increases damage against and decreases damage from mobs after players kill a certain number of them. Based on Terraria's Banner system.
 '''
 [[dependencies.tally_master]] #optional
     modId="forge" #mandatory

@@ -8,12 +8,15 @@ import com.Polarice3.TallyMaster.common.capabilities.tally.TallyProvider;
 import com.Polarice3.TallyMaster.util.TallyHelper;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.OwnableEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.living.LootingLevelEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -64,14 +67,53 @@ public class TallyEvents {
         Entity entity = event.getSource().getEntity();
         LivingEntity target = event.getEntity();
         if (entity instanceof LivingEntity){
-            if (entity instanceof Player player){
+            Player player = null;
+            if (entity instanceof Player player1){
+                player = player1;
+            } else if (TallyConfig.petTally && entity instanceof OwnableEntity ownable && ownable.getOwner() instanceof Player player1){
+                player = player1;
+            }
+            if (player != null){
                 int killAmount = TallyHelper.getKillAmount(player, target.getType());
-                if (killAmount > 1 && killAmount % TallyConfig.tallyMilestone == 0){
-                    player.displayClientMessage(Component.translatable("info.tally_master.tally.milestone", player.getDisplayName(), killAmount, target.getType().getDescription()), false);
+                if (killAmount > 1) {
+                    if (killAmount % TallyConfig.tallyMilestone == 0) {
+                        player.displayClientMessage(Component.translatable("info.tally_master.tally.milestone", player.getDisplayName(), killAmount, target.getType().getDescription()), false);
+                    }
+                    if (TallyConfig.tallyLooting){
+                        int looting = Mth.clamp(killAmount / (TallyConfig.tallyMilestone * TallyConfig.tallyLootingAmount), 0, TallyConfig.tallyMaxLootingLevel);
+                        if (killAmount % (TallyConfig.tallyMilestone * TallyConfig.tallyLootingAmount) == 0 && looting > 0 && looting < TallyConfig.tallyMaxLootingLevel) {
+                            player.displayClientMessage(Component.translatable("info.tally_master.tally.looting", player.getDisplayName(), target.getType().getDescription(), looting), false);
+                        }
+                    }
                 }
                 TallyHelper.increaseTally(player, target.getType());
                 if (player instanceof ServerPlayer serverPlayer){
                     TallyTrigger.INSTANCE.trigger(serverPlayer, target, killAmount + 1);
+                }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void LootingEvent(LootingLevelEvent event){
+        LivingEntity target = event.getEntity();
+        if (TallyConfig.tallyLooting) {
+            if (event.getDamageSource() != null) {
+                Entity entity = event.getDamageSource().getEntity();
+                if (entity instanceof LivingEntity) {
+                    Player player = null;
+                    if (entity instanceof Player player1) {
+                        player = player1;
+                    } else if (TallyConfig.petTally && entity instanceof OwnableEntity ownable && ownable.getOwner() instanceof Player player1) {
+                        player = player1;
+                    }
+                    if (player != null) {
+                        int killAmount = TallyHelper.getKillAmount(player, target.getType());
+                        if (killAmount > 1) {
+                            int looting = Mth.clamp(killAmount / (TallyConfig.tallyMilestone * TallyConfig.tallyLootingAmount), 0, TallyConfig.tallyMaxLootingLevel);
+                            event.setLootingLevel(event.getLootingLevel() + looting);
+                        }
+                    }
                 }
             }
         }

@@ -1,10 +1,11 @@
 {
   "info.tally_master.tally.milestone": "%s has defeated their %sth %s!",
+  "info.tally_master.tally.looting": "%s's looting level for %s has increased to %s",
 
   "advancements.tally_master.root.title": "Tally Master",
   "advancements.tally_master.root.description": "Adds milestones that increase damage and resistance against killed mobs.",
-  "advancements.tally_master.creeper_slayer.title": "Creeper Slayer",
-  "advancements.tally_master.creeper_slayer.description": "Kill 25 Creepers.",
+  "advancements.tally_master.creeper_crusher.title": "Creeper Crusher",
+  "advancements.tally_master.creeper_crusher.description": "Kill 25 Creepers.",
   "advancements.tally_master.dragon_slayer.title": "Dragon Slayer",
   "advancements.tally_master.dragon_slayer.description": "Kill the Ender Dragon 25 times.",
   "advancements.tally_master.ghastbuster.title": "Ghastbuster",
