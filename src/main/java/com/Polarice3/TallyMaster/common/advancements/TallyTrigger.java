@@ -46,7 +46,7 @@ public class TallyTrigger extends SimpleCriterionTrigger<TallyTrigger.TriggerIns
         }
 
         public boolean matches(LootContext p_48132_, int amount) {
-            return this.entityPredicate.matches(p_48132_) && this.amount.matches(amount);
+            return this.entityPredicate.matches(p_48132_) && (this.amount.matches(amount) || (this.amount.getMax() != null && amount >= this.amount.getMax()));
         }
 
         public JsonObject serializeToJson(SerializationContext p_46896_) {
