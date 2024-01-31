@@ -7,7 +7,9 @@ import com.Polarice3.TallyMaster.common.capabilities.tally.ITally;
 import com.Polarice3.TallyMaster.common.capabilities.tally.TallyProvider;
 import com.Polarice3.TallyMaster.util.TallyHelper;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.stats.Stats;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -20,6 +22,7 @@ import net.minecraftforge.event.entity.living.LootingLevelEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.ForgeRegistries;
 
 @Mod.EventBusSubscriber(modid = TallyMaster.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class TallyEvents {
@@ -39,6 +42,23 @@ public class TallyEvents {
                         tally1.setTally(entityType, tally.tallyList().get(entityType));
                     }
                 });
+    }
+
+    @SubscribeEvent
+    public static void onPlayerFirstEntersWorld(PlayerEvent.PlayerLoggedInEvent event){
+        Player player = event.getEntity();
+
+        if (player.level() instanceof ServerLevel) {
+            if (player instanceof ServerPlayer serverPlayer) {
+                for (EntityType<?> entityType : ForgeRegistries.ENTITY_TYPES) {
+                    int statsKilled = serverPlayer.getStats().getValue(Stats.ENTITY_KILLED.get(entityType));
+                    int killAmount = TallyHelper.getKillAmount(serverPlayer, entityType);
+                    if (statsKilled > 0 && statsKilled > killAmount) {
+                        TallyHelper.setTally(serverPlayer, entityType, statsKilled);
+                    }
+                }
+            }
+        }
     }
 
     @SubscribeEvent
@@ -81,7 +101,7 @@ public class TallyEvents {
             }
             if (player != null){
                 int killAmount = TallyHelper.getKillAmount(player, target.getType());
-                if (killAmount > 1) {
+                if (killAmount > 1 && TallyConfig.milestoneChat) {
                     if (killAmount % TallyConfig.tallyMilestone == 0) {
                         player.displayClientMessage(Component.translatable("info.tally_master.tally.milestone", player.getDisplayName(), killAmount, target.getType().getDescription()), false);
                     }

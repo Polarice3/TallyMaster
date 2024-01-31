@@ -18,6 +18,11 @@ public class TallyHelper {
         sendTallyUpdatePacket(player);
     }
 
+    public static void setTally(Player player, EntityType<?> entityType, int amount){
+        getCapability(player).setTally(entityType, amount);
+        sendTallyUpdatePacket(player);
+    }
+
     public static int getKillAmount(Player player, EntityType<?> entityType){
         if (getCapability(player).tallyList().containsKey(entityType)){
             return getCapability(player).tallyList().get(entityType);

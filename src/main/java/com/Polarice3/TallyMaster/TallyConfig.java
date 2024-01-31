@@ -31,6 +31,9 @@ public class TallyConfig {
     private static final ForgeConfigSpec.BooleanValue TALLY_LOOTING = BUILDER
             .comment("Reaching a certain milestone amount will increase looting against the mob type.")
             .define("tallyLooting", true);
+    private static final ForgeConfigSpec.BooleanValue MILESTONE_CHAT = BUILDER
+            .comment("Shows in player's chat if they have reached a milestone")
+            .define("milestoneChat", true);
 
     static final ForgeConfigSpec SPEC = BUILDER.build();
 
@@ -42,6 +45,7 @@ public class TallyConfig {
 
     public static boolean petTally;
     public static boolean tallyLooting;
+    public static boolean milestoneChat;
 
     @SubscribeEvent
     static void onLoad(final ModConfigEvent event) {
@@ -53,5 +57,6 @@ public class TallyConfig {
 
         petTally = PET_TALLY.get();
         tallyLooting = TALLY_LOOTING.get();
+        milestoneChat = MILESTONE_CHAT.get();
     }
 }
