@@ -45,19 +45,23 @@ public class TallyEvents {
     public static void LivingHurt(LivingHurtEvent event){
         Entity entity = event.getSource().getEntity();
         LivingEntity target = event.getEntity();
-        if (entity instanceof Player player){
-            int killAmount = TallyHelper.getKillAmount(player, target.getType());
-            int postKill = killAmount / TallyConfig.tallyMilestone;
-            float prof = (0.05F * postKill) + 1.0F;
-            event.setAmount(event.getAmount() * prof);
-        }
-        if (target instanceof Player player){
-            if (entity instanceof LivingEntity livingSource) {
-                int killAmount = TallyHelper.getKillAmount(player, livingSource.getType());
+        if (TallyConfig.tallyDamage) {
+            if (entity instanceof Player player) {
+                int killAmount = TallyHelper.getKillAmount(player, target.getType());
                 int postKill = killAmount / TallyConfig.tallyMilestone;
-                float prof = 0.05F * postKill;
-                float finalAmount = Math.min(event.getAmount() * prof, event.getAmount() - 1.0F);
-                event.setAmount(event.getAmount() - finalAmount);
+                float prof = (0.05F * postKill) + 1.0F;
+                event.setAmount(event.getAmount() * prof);
+            }
+        }
+        if (TallyConfig.tallyResistance) {
+            if (target instanceof Player player) {
+                if (entity instanceof LivingEntity livingSource) {
+                    int killAmount = TallyHelper.getKillAmount(player, livingSource.getType());
+                    int postKill = killAmount / TallyConfig.tallyMilestone;
+                    float prof = 0.05F * postKill;
+                    float finalAmount = Math.min(event.getAmount() * prof, event.getAmount() - 1.0F);
+                    event.setAmount(event.getAmount() - finalAmount);
+                }
             }
         }
     }
@@ -80,8 +84,8 @@ public class TallyEvents {
                         player.displayClientMessage(Component.translatable("info.tally_master.tally.milestone", player.getDisplayName(), killAmount, target.getType().getDescription()), false);
                     }
                     if (TallyConfig.tallyLooting){
-                        int looting = Mth.clamp(killAmount / (TallyConfig.tallyMilestone * TallyConfig.tallyLootingAmount), 0, TallyConfig.tallyMaxLootingLevel);
-                        if (killAmount % (TallyConfig.tallyMilestone * TallyConfig.tallyLootingAmount) == 0 && looting > 0 && looting < TallyConfig.tallyMaxLootingLevel) {
+                        int looting = Mth.clamp(killAmount / TallyConfig.tallyLootingAmount, 0, TallyConfig.tallyMaxLootingLevel);
+                        if (killAmount % (TallyConfig.tallyLootingAmount) == 0 && looting > 0 && looting < TallyConfig.tallyMaxLootingLevel) {
                             player.displayClientMessage(Component.translatable("info.tally_master.tally.looting", player.getDisplayName(), target.getType().getDescription(), looting), false);
                         }
                     }
@@ -110,7 +114,7 @@ public class TallyEvents {
                     if (player != null) {
                         int killAmount = TallyHelper.getKillAmount(player, target.getType());
                         if (killAmount > 1) {
-                            int looting = Mth.clamp(killAmount / (TallyConfig.tallyMilestone * TallyConfig.tallyLootingAmount), 0, TallyConfig.tallyMaxLootingLevel);
+                            int looting = Mth.clamp(killAmount / TallyConfig.tallyLootingAmount, 0, TallyConfig.tallyMaxLootingLevel);
                             event.setLootingLevel(event.getLootingLevel() + looting);
                         }
                     }
