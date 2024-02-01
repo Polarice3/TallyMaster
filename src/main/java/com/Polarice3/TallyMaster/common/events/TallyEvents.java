@@ -68,8 +68,7 @@ public class TallyEvents {
         LivingEntity target = event.getEntity();
         if (TallyConfig.tallyAttack > 0) {
             if (entity instanceof Player player) {
-                int killAmount = TallyHelper.getKillAmount(player, target.getType());
-                int postKill = killAmount / TallyConfig.tallyMilestone;
+                int postKill = TallyHelper.getMilestone(player, target.getType());
                 float percent = TallyConfig.tallyAttack / 100.0F;
                 if (TallyConfig.tallyAttackLimit > 0) {
                     float limit = TallyConfig.tallyAttackLimit / 100.0F;
@@ -82,8 +81,7 @@ public class TallyEvents {
         if (TallyConfig.tallyDefense > 0) {
             if (target instanceof Player player) {
                 if (entity instanceof LivingEntity livingSource) {
-                    int killAmount = TallyHelper.getKillAmount(player, livingSource.getType());
-                    int postKill = killAmount / TallyConfig.tallyMilestone;
+                    int postKill = TallyHelper.getMilestone(player, livingSource.getType());
                     float percent = TallyConfig.tallyDefense / 100.0F;
                     if (TallyConfig.tallyDefenseLimit > 0) {
                         float limit = TallyConfig.tallyDefenseLimit / 100.0F;
