@@ -70,6 +70,10 @@ public class TallyEvents {
                 int killAmount = TallyHelper.getKillAmount(player, target.getType());
                 int postKill = killAmount / TallyConfig.tallyMilestone;
                 float percent = TallyConfig.tallyAttack / 100.0F;
+                if (TallyConfig.tallyAttackLimit > 0) {
+                    float limit = TallyConfig.tallyAttackLimit / 100.0F;
+                    percent = Math.min(percent, limit);
+                }
                 float prof = (percent * postKill) + 1.0F;
                 event.setAmount(event.getAmount() * prof);
             }
@@ -80,6 +84,10 @@ public class TallyEvents {
                     int killAmount = TallyHelper.getKillAmount(player, livingSource.getType());
                     int postKill = killAmount / TallyConfig.tallyMilestone;
                     float percent = TallyConfig.tallyDefense / 100.0F;
+                    if (TallyConfig.tallyDefenseLimit > 0) {
+                        float limit = TallyConfig.tallyDefenseLimit / 100.0F;
+                        percent = Math.min(percent, limit);
+                    }
                     float prof = percent * postKill;
                     float finalAmount = Math.min(event.getAmount() * prof, event.getAmount() - 1.0F);
                     event.setAmount(event.getAmount() - finalAmount);
@@ -107,8 +115,12 @@ public class TallyEvents {
                     }
                     if (TallyConfig.tallyLooting){
                         int looting = Mth.clamp(killAmount / TallyConfig.tallyLootingAmount, 0, TallyConfig.tallyMaxLootingLevel);
-                        if (killAmount % (TallyConfig.tallyLootingAmount) == 0 && looting > 0 && looting < TallyConfig.tallyMaxLootingLevel) {
-                            player.displayClientMessage(Component.translatable("info.tally_master.tally.looting", player.getDisplayName(), target.getType().getDescription(), looting), false);
+                        if (killAmount % (TallyConfig.tallyLootingAmount) == 0 && looting > 0) {
+                            if (looting == TallyConfig.tallyMaxLootingLevel){
+                                player.displayClientMessage(Component.translatable("info.tally_master.tally.lootingMax", player.getDisplayName(), target.getType().getDescription()), false);
+                            } else if (looting < TallyConfig.tallyMaxLootingLevel) {
+                                player.displayClientMessage(Component.translatable("info.tally_master.tally.looting", player.getDisplayName(), target.getType().getDescription(), looting), false);
+                            }
                         }
                     }
                 }
