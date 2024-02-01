@@ -15,9 +15,15 @@ public class TallyConfig {
     private static final ForgeConfigSpec.IntValue TALLY_ATTACK = BUILDER
             .comment("Percentage increase of player's damage against tallied mob per milestone. Set 0 to disable increase.")
             .defineInRange("tallyAttack", 5, 0, 100);
+    private static final ForgeConfigSpec.IntValue TALLY_ATTACK_LIMIT = BUILDER
+            .comment("Maximum percentage buff of the player's damage against tallied mob they can attain. Set 0 to have no buff limit.")
+            .defineInRange("tallyAttackLimit", 0, 0, Integer.MAX_VALUE);
     private static final ForgeConfigSpec.IntValue TALLY_DEFENSE = BUILDER
             .comment("Percentage increase of player's defense against tallied mob per milestone. Set 0 to disable increase.")
             .defineInRange("tallyDefense", 5, 0, 100);
+    private static final ForgeConfigSpec.IntValue TALLY_DEFENSE_LIMIT = BUILDER
+            .comment("Maximum percentage buff of the player's defense against tallied mob they can attain. Set 0 to have no buff limit.")
+            .defineInRange("tallyDefenseLimit", 0, 0, Integer.MAX_VALUE);
     private static final ForgeConfigSpec.IntValue TALLY_LOOTING_AMOUNT = BUILDER
             .comment("Only works if tallyLooting is enabled. Defines the amount of kills to increase looting level. Best if value is higher than tallyMilestone.")
             .defineInRange("tallyLootingMilestone", 100, 1, Integer.MAX_VALUE);
@@ -39,7 +45,9 @@ public class TallyConfig {
 
     public static int tallyMilestone;
     public static int tallyAttack;
+    public static int tallyAttackLimit;
     public static int tallyDefense;
+    public static int tallyDefenseLimit;
     public static int tallyLootingAmount;
     public static int tallyMaxLootingLevel;
 
@@ -51,7 +59,9 @@ public class TallyConfig {
     static void onLoad(final ModConfigEvent event) {
         tallyMilestone = TALLY_MILESTONE.get();
         tallyAttack = TALLY_ATTACK.get();
+        tallyAttackLimit = TALLY_ATTACK_LIMIT.get();
         tallyDefense = TALLY_DEFENSE.get();
+        tallyDefenseLimit = TALLY_DEFENSE_LIMIT.get();
         tallyLootingAmount = TALLY_LOOTING_AMOUNT.get();
         tallyMaxLootingLevel = TALLY_MAX_LOOTING_LEVEL.get();
 

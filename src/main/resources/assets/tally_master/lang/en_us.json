@@ -1,9 +1,12 @@
 {
   "info.tally_master.tally.milestone": "%s has defeated their %sth %s!",
   "info.tally_master.tally.looting": "%s's looting level for %s has increased to %s",
+  "info.tally_master.tally.lootingMax": "%s has reached maximum looting level for %s",
 
   "advancements.tally_master.root.title": "Tally Master",
   "advancements.tally_master.root.description": "Adds milestones that increase damage and resistance against killed mobs.",
+  "advancements.tally_master.arch_illager.title": "Arch Illager",
+  "advancements.tally_master.arch_illager.description": "Kill 100 Villagers.",
   "advancements.tally_master.creeper_crusher.title": "Creeper Crusher",
   "advancements.tally_master.creeper_crusher.description": "Kill 25 Creepers.",
   "advancements.tally_master.dragon_slayer.title": "Dragon Slayer",
@@ -14,6 +17,10 @@
   "advancements.tally_master.glue_factory.description": "Kill 25 Horses",
   "advancements.tally_master.mass_exorcism.title": "Mass Exorcism",
   "advancements.tally_master.mass_exorcism.description": "Purge 25 Withers.",
+  "advancements.tally_master.pest_controller.title": "Pest Controller",
+  "advancements.tally_master.pest_controller.description": "Kill 25 Spiders, Cave Spiders, Silverfishes and Endermites.",
+  "advancements.tally_master.shulker_shucker.title": "Shulker Shucker",
+  "advancements.tally_master.shulker_shucker.description": "Kill 25 Shulkers.",
   "advancements.tally_master.slaughterhouse.title": "Slaughterhouse",
   "advancements.tally_master.slaughterhouse.description": "Butcher a 100 livestock.",
   "advancements.tally_master.slimy_squisher.title": "Slimy Squisher",
