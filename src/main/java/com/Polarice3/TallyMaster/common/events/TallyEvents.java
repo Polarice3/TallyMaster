@@ -17,6 +17,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.OwnableEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LivingExperienceDropEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.LootingLevelEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -129,6 +130,19 @@ public class TallyEvents {
                     TallyTrigger.INSTANCE.trigger(serverPlayer, target, killAmount + 1);
                 }
             }
+        }
+    }
+
+    @SubscribeEvent
+    public static void ExperienceEvent(LivingExperienceDropEvent event){
+        Player player = event.getAttackingPlayer();
+        if (TallyConfig.tallyExperience){
+            int postKill = TallyHelper.getMilestone(player, event.getEntity().getType());
+            int increase = postKill * TallyConfig.tallyExperienceIncrease;
+            if (TallyConfig.tallyExperienceLimit > 0) {
+                increase = Math.min(increase, TallyConfig.tallyExperienceLimit);
+            }
+            event.setDroppedExperience(event.getOriginalExperience() + increase);
         }
     }
 

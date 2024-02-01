@@ -1,5 +1,6 @@
 package com.Polarice3.TallyMaster.util;
 
+import com.Polarice3.TallyMaster.TallyConfig;
 import com.Polarice3.TallyMaster.common.capabilities.tally.ITally;
 import com.Polarice3.TallyMaster.common.capabilities.tally.TallyImp;
 import com.Polarice3.TallyMaster.common.capabilities.tally.TallyProvider;
@@ -28,6 +29,11 @@ public class TallyHelper {
             return getCapability(player).tallyList().get(entityType);
         }
         return 0;
+    }
+
+    public static int getMilestone(Player player, EntityType<?> entityType){
+        int killAmount = TallyHelper.getKillAmount(player, entityType);
+        return killAmount / TallyConfig.tallyMilestone;
     }
 
     public static void sendTallyUpdatePacket(Player player) {

@@ -30,6 +30,12 @@ public class TallyConfig {
     private static final ForgeConfigSpec.IntValue TALLY_MAX_LOOTING_LEVEL = BUILDER
             .comment("Only works if tallyLooting is enabled. The maximum looting level the player can attain from looting milestones.")
             .defineInRange("tallyMaxLootingLevel", 3, 1, Integer.MAX_VALUE);
+    private static final ForgeConfigSpec.IntValue TALLY_EXPERIENCE_INCREASE = BUILDER
+            .comment("Only works if tallyExperience is enabled. Defines how much experience is increased after player reaches a milestone.")
+            .defineInRange("tallyExperienceIncrease", 2, 1, Integer.MAX_VALUE);
+    private static final ForgeConfigSpec.IntValue TALLY_EXPERIENCE_LIMIT = BUILDER
+            .comment("Maximum experience increase against tallied mob players can attain. Set 0 to have no limit.")
+            .defineInRange("tallyExperienceLimit", 0, 0, Integer.MAX_VALUE);
 
     private static final ForgeConfigSpec.BooleanValue PET_TALLY = BUILDER
             .comment("Whether kills by pets or owned mobs count to player's tally.")
@@ -37,6 +43,9 @@ public class TallyConfig {
     private static final ForgeConfigSpec.BooleanValue TALLY_LOOTING = BUILDER
             .comment("Reaching a certain milestone amount will increase looting against the mob type.")
             .define("tallyLooting", true);
+    private static final ForgeConfigSpec.BooleanValue TALLY_EXPERIENCE = BUILDER
+            .comment("Reaching a milestone amount will increase experience drop from the mob type.")
+            .define("tallyExperience", true);
     private static final ForgeConfigSpec.BooleanValue MILESTONE_CHAT = BUILDER
             .comment("Shows in player's chat if they have reached a milestone")
             .define("milestoneChat", true);
@@ -50,9 +59,12 @@ public class TallyConfig {
     public static int tallyDefenseLimit;
     public static int tallyLootingAmount;
     public static int tallyMaxLootingLevel;
+    public static int tallyExperienceIncrease;
+    public static int tallyExperienceLimit;
 
     public static boolean petTally;
     public static boolean tallyLooting;
+    public static boolean tallyExperience;
     public static boolean milestoneChat;
 
     @SubscribeEvent
@@ -64,9 +76,12 @@ public class TallyConfig {
         tallyDefenseLimit = TALLY_DEFENSE_LIMIT.get();
         tallyLootingAmount = TALLY_LOOTING_AMOUNT.get();
         tallyMaxLootingLevel = TALLY_MAX_LOOTING_LEVEL.get();
+        tallyExperienceIncrease = TALLY_EXPERIENCE_INCREASE.get();
+        tallyExperienceLimit = TALLY_EXPERIENCE_LIMIT.get();
 
         petTally = PET_TALLY.get();
         tallyLooting = TALLY_LOOTING.get();
+        tallyExperience = TALLY_EXPERIENCE.get();
         milestoneChat = MILESTONE_CHAT.get();
     }
 }
