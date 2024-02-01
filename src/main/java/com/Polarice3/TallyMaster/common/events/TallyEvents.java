@@ -17,6 +17,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.OwnableEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LivingExperienceDropEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.LootingLevelEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -67,8 +68,7 @@ public class TallyEvents {
         LivingEntity target = event.getEntity();
         if (TallyConfig.tallyAttack > 0) {
             if (entity instanceof Player player) {
-                int killAmount = TallyHelper.getKillAmount(player, target.getType());
-                int postKill = killAmount / TallyConfig.tallyMilestone;
+                int postKill = TallyHelper.getMilestone(player, target.getType());
                 float percent = TallyConfig.tallyAttack / 100.0F;
                 if (TallyConfig.tallyAttackLimit > 0) {
                     float limit = TallyConfig.tallyAttackLimit / 100.0F;
@@ -81,8 +81,7 @@ public class TallyEvents {
         if (TallyConfig.tallyDefense > 0) {
             if (target instanceof Player player) {
                 if (entity instanceof LivingEntity livingSource) {
-                    int killAmount = TallyHelper.getKillAmount(player, livingSource.getType());
-                    int postKill = killAmount / TallyConfig.tallyMilestone;
+                    int postKill = TallyHelper.getMilestone(player, livingSource.getType());
                     float percent = TallyConfig.tallyDefense / 100.0F;
                     if (TallyConfig.tallyDefenseLimit > 0) {
                         float limit = TallyConfig.tallyDefenseLimit / 100.0F;
@@ -129,6 +128,19 @@ public class TallyEvents {
                     TallyTrigger.INSTANCE.trigger(serverPlayer, target, killAmount + 1);
                 }
             }
+        }
+    }
+
+    @SubscribeEvent
+    public static void ExperienceEvent(LivingExperienceDropEvent event){
+        Player player = event.getAttackingPlayer();
+        if (TallyConfig.tallyExperience){
+            int postKill = TallyHelper.getMilestone(player, event.getEntity().getType());
+            int increase = postKill * TallyConfig.tallyExperienceIncrease;
+            if (TallyConfig.tallyExperienceLimit > 0) {
+                increase = Math.min(increase, TallyConfig.tallyExperienceLimit);
+            }
+            event.setDroppedExperience(event.getOriginalExperience() + increase);
         }
     }
 
