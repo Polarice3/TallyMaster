@@ -2,13 +2,13 @@
   "parent": "tally_master:tally_master/root",
   "display": {
     "icon": {
-      "item": "minecraft:ghast_tear"
+      "item": "minecraft:porkchop"
     },
     "title": {
-      "translate": "advancements.tally_master.ghastbuster.title"
+      "translate": "advancements.tally_master.making_bacon.title"
     },
     "description": {
-      "translate": "advancements.tally_master.ghastbuster.description"
+      "translate": "advancements.tally_master.making_bacon.description"
     },
     "frame": "task",
     "show_toast": true,
@@ -16,14 +16,14 @@
     "hidden": false
   },
   "criteria": {
-    "ghast": {
+    "hoglin": {
       "conditions": {
         "entity": [
           {
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "type": "minecraft:ghast"
+              "type": "minecraft:hoglin"
             }
           }
         ],
@@ -34,7 +34,7 @@
   },
   "requirements": [
     [
-      "ghast"
+      "hoglin"
     ]
   ],
   "rewards": {

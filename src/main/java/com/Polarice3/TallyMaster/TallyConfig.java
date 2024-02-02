@@ -40,6 +40,15 @@ public class TallyConfig {
     private static final ForgeConfigSpec.BooleanValue PET_TALLY = BUILDER
             .comment("Whether kills by pets or owned mobs count to player's tally.")
             .define("petTally", true);
+    private static final ForgeConfigSpec.BooleanValue PET_TALLY_ATTACK = BUILDER
+            .comment("Whether pets or owned mobs also gain attack buffs from player's tally.")
+            .define("petTallyAttack", true);
+    private static final ForgeConfigSpec.BooleanValue PET_TALLY_DEFENSE = BUILDER
+            .comment("Whether pets or owned mobs also gain defense buffs from player's tally.")
+            .define("petTallyDefense", true);
+    private static final ForgeConfigSpec.BooleanValue PET_TALLY_LOOTING = BUILDER
+            .comment("Whether pets or owned mobs also gain looting buffs from player's tally.")
+            .define("petTallyLooting", true);
     private static final ForgeConfigSpec.BooleanValue TALLY_LOOTING = BUILDER
             .comment("Reaching a certain milestone amount will increase looting against the mob type.")
             .define("tallyLooting", true);
@@ -63,6 +72,9 @@ public class TallyConfig {
     public static int tallyExperienceLimit;
 
     public static boolean petTally;
+    public static boolean petTallyAttack;
+    public static boolean petTallyDefense;
+    public static boolean petTallyLooting;
     public static boolean tallyLooting;
     public static boolean tallyExperience;
     public static boolean milestoneChat;
@@ -80,6 +92,9 @@ public class TallyConfig {
         tallyExperienceLimit = TALLY_EXPERIENCE_LIMIT.get();
 
         petTally = PET_TALLY.get();
+        petTallyAttack = PET_TALLY_ATTACK.get();
+        petTallyDefense = PET_TALLY_DEFENSE.get();
+        petTallyLooting = PET_TALLY_LOOTING.get();
         tallyLooting = TALLY_LOOTING.get();
         tallyExperience = TALLY_EXPERIENCE.get();
         milestoneChat = MILESTONE_CHAT.get();

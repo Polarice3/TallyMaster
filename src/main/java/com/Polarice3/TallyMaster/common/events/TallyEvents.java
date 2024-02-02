@@ -67,29 +67,45 @@ public class TallyEvents {
         Entity entity = event.getSource().getEntity();
         LivingEntity target = event.getEntity();
         if (TallyConfig.tallyAttack > 0) {
-            if (entity instanceof Player player) {
-                int postKill = TallyHelper.getMilestone(player, target.getType());
-                float percent = TallyConfig.tallyAttack / 100.0F;
-                if (TallyConfig.tallyAttackLimit > 0) {
-                    float limit = TallyConfig.tallyAttackLimit / 100.0F;
-                    percent = Math.min(percent, limit);
+            if (entity instanceof LivingEntity livingEntity) {
+                Player player = null;
+                if (livingEntity instanceof Player player1) {
+                    player = player1;
+                } else if (TallyConfig.petTallyAttack && livingEntity instanceof OwnableEntity ownable && ownable.getOwner() instanceof Player player1) {
+                    player = player1;
                 }
-                float prof = (percent * postKill) + 1.0F;
-                event.setAmount(event.getAmount() * prof);
+                if (player != null) {
+                    int postKill = TallyHelper.getMilestone(player, target.getType());
+                    float percent = TallyConfig.tallyAttack / 100.0F;
+                    if (TallyConfig.tallyAttackLimit > 0) {
+                        float limit = TallyConfig.tallyAttackLimit / 100.0F;
+                        percent = Math.min(percent, limit);
+                    }
+                    float prof = (percent * postKill) + 1.0F;
+                    event.setAmount(event.getAmount() * prof);
+                }
             }
         }
         if (TallyConfig.tallyDefense > 0) {
-            if (target instanceof Player player) {
-                if (entity instanceof LivingEntity livingSource) {
-                    int postKill = TallyHelper.getMilestone(player, livingSource.getType());
-                    float percent = TallyConfig.tallyDefense / 100.0F;
-                    if (TallyConfig.tallyDefenseLimit > 0) {
-                        float limit = TallyConfig.tallyDefenseLimit / 100.0F;
-                        percent = Math.min(percent, limit);
+            if (target != null) {
+                Player player = null;
+                if (target instanceof Player player1) {
+                    player = player1;
+                } else if (TallyConfig.petTallyDefense && target instanceof OwnableEntity ownable && ownable.getOwner() instanceof Player player1) {
+                    player = player1;
+                }
+                if (player != null) {
+                    if (entity instanceof LivingEntity livingSource) {
+                        int postKill = TallyHelper.getMilestone(player, livingSource.getType());
+                        float percent = TallyConfig.tallyDefense / 100.0F;
+                        if (TallyConfig.tallyDefenseLimit > 0) {
+                            float limit = TallyConfig.tallyDefenseLimit / 100.0F;
+                            percent = Math.min(percent, limit);
+                        }
+                        float prof = percent * postKill;
+                        float finalAmount = Math.min(event.getAmount() * prof, event.getAmount() - 1.0F);
+                        event.setAmount(event.getAmount() - finalAmount);
                     }
-                    float prof = percent * postKill;
-                    float finalAmount = Math.min(event.getAmount() * prof, event.getAmount() - 1.0F);
-                    event.setAmount(event.getAmount() - finalAmount);
                 }
             }
         }
@@ -154,7 +170,7 @@ public class TallyEvents {
                     Player player = null;
                     if (entity instanceof Player player1) {
                         player = player1;
-                    } else if (TallyConfig.petTally && entity instanceof OwnableEntity ownable && ownable.getOwner() instanceof Player player1) {
+                    } else if (TallyConfig.petTallyLooting && entity instanceof OwnableEntity ownable && ownable.getOwner() instanceof Player player1) {
                         player = player1;
                     }
                     if (player != null) {

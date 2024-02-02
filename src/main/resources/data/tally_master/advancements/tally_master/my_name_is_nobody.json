@@ -2,13 +2,13 @@
   "parent": "tally_master:tally_master/root",
   "display": {
     "icon": {
-      "item": "minecraft:ghast_tear"
+      "item": "minecraft:prismarine_bricks"
     },
     "title": {
-      "translate": "advancements.tally_master.ghastbuster.title"
+      "translate": "advancements.tally_master.my_name_is_nobody.title"
     },
     "description": {
-      "translate": "advancements.tally_master.ghastbuster.description"
+      "translate": "advancements.tally_master.my_name_is_nobody.description"
     },
     "frame": "task",
     "show_toast": true,
@@ -16,14 +16,14 @@
     "hidden": false
   },
   "criteria": {
-    "ghast": {
+    "guardian": {
       "conditions": {
         "entity": [
           {
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "type": "minecraft:ghast"
+              "type": "minecraft:guardian"
             }
           }
         ],
@@ -34,7 +34,7 @@
   },
   "requirements": [
     [
-      "ghast"
+      "guardian"
     ]
   ],
   "rewards": {
