@@ -2,13 +2,13 @@
   "parent": "tally_master:tally_master/root",
   "display": {
     "icon": {
-      "item": "minecraft:ghast_tear"
+      "item": "minecraft:rabbit_foot"
     },
     "title": {
-      "translate": "advancements.tally_master.ghastbuster.title"
+      "translate": "advancements.tally_master.rabbit_season.title"
     },
     "description": {
-      "translate": "advancements.tally_master.ghastbuster.description"
+      "translate": "advancements.tally_master.rabbit_season.description"
     },
     "frame": "task",
     "show_toast": true,
@@ -16,14 +16,14 @@
     "hidden": false
   },
   "criteria": {
-    "ghast": {
+    "rabbit": {
       "conditions": {
         "entity": [
           {
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "type": "minecraft:ghast"
+              "type": "minecraft:rabbit"
             }
           }
         ],
@@ -34,10 +34,10 @@
   },
   "requirements": [
     [
-      "ghast"
+      "rabbit"
     ]
   ],
   "rewards": {
-    "experience": 25
+    "experience": 10
   }
 }

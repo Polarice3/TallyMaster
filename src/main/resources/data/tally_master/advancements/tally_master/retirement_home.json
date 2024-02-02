@@ -1,29 +1,29 @@
 {
-  "parent": "tally_master:tally_master/root",
+  "parent": "tally_master:tally_master/my_name_is_nobody",
   "display": {
     "icon": {
-      "item": "minecraft:ghast_tear"
+      "item": "minecraft:sponge"
     },
     "title": {
-      "translate": "advancements.tally_master.ghastbuster.title"
+      "translate": "advancements.tally_master.retirement_home.title"
     },
     "description": {
-      "translate": "advancements.tally_master.ghastbuster.description"
+      "translate": "advancements.tally_master.retirement_home.description"
     },
-    "frame": "task",
+    "frame": "goal",
     "show_toast": true,
     "announce_to_chat": true,
     "hidden": false
   },
   "criteria": {
-    "ghast": {
+    "guardian": {
       "conditions": {
         "entity": [
           {
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "type": "minecraft:ghast"
+              "type": "minecraft:elder_guardian"
             }
           }
         ],
@@ -34,10 +34,10 @@
   },
   "requirements": [
     [
-      "ghast"
+      "guardian"
     ]
   ],
   "rewards": {
-    "experience": 25
+    "experience": 100
   }
 }
