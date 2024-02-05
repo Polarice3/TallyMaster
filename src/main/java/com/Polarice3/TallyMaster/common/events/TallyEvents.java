@@ -33,16 +33,18 @@ public class TallyEvents {
         Player player = event.getEntity();
         Player original = event.getOriginal();
 
-        original.reviveCaps();
+        if (original != null && player != null) {
+            original.reviveCaps();
 
-        ITally tally = TallyHelper.getCapability(original);
+            ITally tally = TallyHelper.getCapability(original);
 
-        player.getCapability(TallyProvider.CAPABILITY)
-                .ifPresent(tally1 -> {
-                    for (EntityType<?> entityType : tally.tallyList().keySet()){
-                        tally1.setTally(entityType, tally.tallyList().get(entityType));
-                    }
-                });
+            player.getCapability(TallyProvider.CAPABILITY)
+                    .ifPresent(tally1 -> {
+                        for (EntityType<?> entityType : tally.tallyList().keySet()) {
+                            tally1.setTally(entityType, tally.tallyList().get(entityType));
+                        }
+                    });
+        }
     }
 
     @SubscribeEvent
@@ -150,13 +152,15 @@ public class TallyEvents {
     @SubscribeEvent
     public static void ExperienceEvent(LivingExperienceDropEvent event){
         Player player = event.getAttackingPlayer();
-        if (TallyConfig.tallyExperience){
-            int postKill = TallyHelper.getMilestone(player, event.getEntity().getType());
-            int increase = postKill * TallyConfig.tallyExperienceIncrease;
-            if (TallyConfig.tallyExperienceLimit > 0) {
-                increase = Math.min(increase, TallyConfig.tallyExperienceLimit);
+        if (player != null) {
+            if (TallyConfig.tallyExperience) {
+                int postKill = TallyHelper.getMilestone(player, event.getEntity().getType());
+                int increase = postKill * TallyConfig.tallyExperienceIncrease;
+                if (TallyConfig.tallyExperienceLimit > 0) {
+                    increase = Math.min(increase, TallyConfig.tallyExperienceLimit);
+                }
+                event.setDroppedExperience(event.getOriginalExperience() + increase);
             }
-            event.setDroppedExperience(event.getOriginalExperience() + increase);
         }
     }
 
